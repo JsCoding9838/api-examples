@@ -1,3 +1,13 @@
+const searchBtn = document.getElementById("button-search");
+const searchInput = document.getElementById("search-field");
+
+searchInput.addEventListener("keypress", function(event) {
+    // event.preventDefault();
+    if (event.key === 'Enter'){
+        searchBtn.click();
+    }
+});
+
 document.getElementById('error-message').style.display = 'none';
 
 const searchFood = () => {
@@ -7,7 +17,12 @@ const searchFood = () => {
     searchField.value = '';
 
     if (searchText == ''){
+        // searchResult.innerHTML = '';
+        const searchResult = document.getElementById('search-result');
+        searchResult.textContent = '';
+
         // Please write something ot display
+        document.getElementById('error-message').style.display = 'block';
     }
     else {
 
@@ -18,7 +33,7 @@ const searchFood = () => {
             .then(response => response.json())
             .then(data => displaySearchResult(data.meals))
             .catch(error => displayError(error))
-
+            document.getElementById('error-message').style.display = 'none';
     }
 };
 
